@@ -121,3 +121,33 @@ struct DNode {
 - Remember to `delete` removed nodes to avoid memory leaks (raw pointers
   require manual management — see
   [Dynamic Memory Allocation](../../00-cpp-basics/13-dynamic-memory-allocation/notes.md)).
+
+## Practice Problems (LeetCode)
+
+See `practice.cpp` for full working solutions.
+
+1. **[Hard] Merge k Sorted Lists** (LeetCode 23) — Merge `k` sorted
+   linked lists into one sorted list. Approach: push all list heads into
+   a min-heap (`priority_queue`) keyed by node value; repeatedly pop the
+   smallest, append it to the result, and push its `next` if non-null.
+   O(N log k) where N is the total number of nodes.
+
+2. **[Hard] Reverse Nodes in k-Group** (LeetCode 25) — Reverse the nodes
+   of a linked list `k` at a time. Approach: reverse each group of `k`
+   nodes iteratively (same technique as the basic reversal), then relink
+   the reversed group between the previous group's tail and the next
+   group's head. If fewer than `k` nodes remain, leave them as-is.
+
+3. **[Medium/Classic] Linked List Cycle II** (LeetCode 142) — Detect
+   whether a linked list has a cycle, and if so, return the node where
+   the cycle begins. Approach: **Floyd's Cycle Detection** (tortoise and
+   hare) — a slow pointer moves 1 step, a fast pointer moves 2 steps; if
+   they meet, a cycle exists. To find the cycle's start, reset one
+   pointer to `head` and advance both one step at a time until they meet
+   again — that node is the cycle's start.
+
+4. **[Medium] Copy List with Random Pointer** (LeetCode 138) — Each node
+   has an extra `random` pointer to any node in the list (or null). Deep
+   copy the list. Approach: use a hash map from original node ->
+   cloned node, built in one pass; in a second pass, wire up `next` and
+   `random` pointers on the clones using the map.

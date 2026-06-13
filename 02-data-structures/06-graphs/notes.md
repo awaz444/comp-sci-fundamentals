@@ -84,3 +84,37 @@ adj[1].push_back(0); // (if undirected, add both directions)
   [Binary Trees](../04-binary-trees/notes.md) for the tree versions).
 - For undirected graphs, remember to add edges in **both** directions
   in an adjacency list/matrix.
+
+## Practice Problems (LeetCode)
+
+See `practice.cpp` for full working solutions.
+
+1. **[Hard] Word Ladder** (LeetCode 127) — Given a start word, end word,
+   and a word list, find the length of the shortest transformation
+   sequence where each step changes exactly one letter and each
+   intermediate word must exist in the word list. Approach: BFS where
+   each "neighbor" of a word is obtained by changing one character at a
+   time to every letter a-z and checking membership in the word set.
+   The first time the end word is reached, the BFS depth is the answer.
+
+2. **[Medium/Classic] Course Schedule II** (LeetCode 210) — Given course
+   prerequisites (directed edges), return a valid ordering to take all
+   courses, or an empty list if impossible (cycle). Approach:
+   **topological sort** via Kahn's algorithm — compute in-degrees,
+   repeatedly remove nodes with in-degree 0 (BFS with a queue), and
+   append them to the result. If not all nodes are processed, a cycle
+   exists.
+
+3. **[Hard] Network Delay Time** (LeetCode 743) — Given a weighted
+   directed graph and a source node, find the time for a signal to
+   reach all nodes (or -1 if impossible). Approach: **Dijkstra's
+   algorithm** — a min-heap (`priority_queue`) of `(distance, node)`,
+   relaxing edges greedily; the answer is the maximum finite distance
+   to any node.
+
+4. **[Medium/Classic] Number of Islands** (LeetCode 200) — Given a grid
+   of `1`s (land) and `0`s (water), count the number of islands
+   (connected components of `1`s, 4-directionally connected). Approach:
+   DFS or BFS flood-fill from every unvisited land cell, marking all
+   connected land cells as visited; each flood-fill started = one
+   island.

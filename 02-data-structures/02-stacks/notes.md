@@ -99,3 +99,34 @@ Use a stack to hold operators:
   real-world applications of stacks.
 - `std::stack` is a container *adapter* — by default backed by
   `std::deque` (see [Stack STL](../../10-cpp-standard-library/04-stack-container/notes.md)).
+
+## Practice Problems (LeetCode)
+
+See `practice.cpp` for full working solutions.
+
+1. **[Hard] Largest Rectangle in Histogram** (LeetCode 84) — Given bar
+   heights, find the area of the largest rectangle that fits under the
+   skyline. Approach: maintain a stack of indices with **increasing**
+   bar heights. When a shorter bar is seen, pop taller bars and compute
+   the rectangle each one could form (its height times the width
+   between the new top of the stack and the current index). O(n).
+
+2. **[Hard] Trapping Rain Water** (LeetCode 42) — Given bar heights,
+   compute how much water is trapped after rain. Approach (stack-based):
+   maintain a stack of indices with **decreasing** heights. When a
+   taller bar is found, pop and compute the water trapped above each
+   popped bar, bounded by the smaller of the new top and the current
+   bar. O(n). (A two-pointer approach also solves this in O(n)/O(1)
+   space.)
+
+3. **[Hard] Basic Calculator** (LeetCode 224) — Evaluate a string
+   expression containing `+`, `-`, parentheses, and whitespace (no `*`
+   or `/`). Approach: maintain a running result and sign; on `(`, push
+   the current result and sign onto stacks and reset; on `)`, pop and
+   combine. Track the current number digit by digit.
+
+4. **[Easy/Classic] Min Stack** (LeetCode 155) — Design a stack that
+   supports `push`, `pop`, `top`, and retrieving the minimum element in
+   O(1). Approach: maintain a second stack that tracks the minimum seen
+   "so far" at each level — push `min(value, currentMin)` onto it
+   alongside every push to the main stack.
