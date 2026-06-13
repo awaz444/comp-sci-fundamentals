@@ -62,10 +62,13 @@ implementation via `Base::method()`:
 ```cpp
 class Shape {
 public:
-    virtual double area() const = 0 {  // pure virtual WITH a default body
-        return 0.0; // a sensible default that derived classes can opt into
-    }
+    virtual double area() const = 0; // still pure — Shape remains abstract
 };
+
+// Out-of-class definition: a pure virtual function CAN have a body
+double Shape::area() const {
+    return 0.0; // a sensible default that derived classes can opt into
+}
 
 class Unknown : public Shape {
 public:
@@ -74,6 +77,10 @@ public:
     }
 };
 ```
+
+Note the syntax: `= 0 { ... }` inline is **not** valid C++. The body must
+be a separate out-of-class definition (`Shape::area() const { ... }`),
+exactly like the pure virtual destructor case below.
 
 This is rarely used but demonstrates that `= 0` only enforces "must
 override", not "must have no implementation".

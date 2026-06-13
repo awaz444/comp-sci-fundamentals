@@ -4,14 +4,17 @@
 // Abstract class: has a pure virtual function, cannot be instantiated
 class Shape {
 public:
-    // Pure virtual function with a default body ("hidden feature")
-    virtual double area() const = 0 {
-        return 0.0; // default that derived classes can opt into via Shape::area()
-    }
+    // Pure virtual function — Shape remains abstract despite having a body below
+    virtual double area() const = 0;
 
     // Pure virtual destructor — still needs a definition (see below)
     virtual ~Shape() = 0;
 };
+
+// Out-of-class definition for the pure virtual function ("hidden feature")
+double Shape::area() const {
+    return 0.0; // default that derived classes can opt into via Shape::area()
+}
 
 // Pure virtual destructor definition (required even though it's "pure")
 Shape::~Shape() {
